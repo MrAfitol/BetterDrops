@@ -17,6 +17,9 @@ The original plugin for Exiled https://github.com/Jesus-QC/BetterDrops
   ***Or***
   
    - *Run the command in console `p install MrAfitol/BetterDrops`*
+## View
+https://user-images.githubusercontent.com/76150070/210635510-aacb7c2f-f651-4f00-abcb-7b74900faa22.mp4
+
 ## Config
 ```yml
 is_enabled: true
