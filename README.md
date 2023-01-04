@@ -4,6 +4,7 @@
 
 
 Plugin to summon and spawn drops.
+
 The original plugin for Exiled https://github.com/Jesus-QC/BetterDrops
 ## How download ?
    - *1. Find the SCP SL server config folder*
