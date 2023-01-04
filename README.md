@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/76150070/210635510-aacb7c2f-f651-4f00-
 
 ## Config
 ```yml
-is_enabled: true
+iis_enabled: true
 # The configs of the MTF drop waves.
 mtf_drop_wave:
 # Is the drop wave enabled.
@@ -34,6 +34,8 @@ mtf_drop_wave:
   items_per_drop: 1
   # Drop color. (It accepts Random or hex values like '#ffffff')
   color: Random
+  # Cassie message on spawn drop. (Leave blank to disable)
+  cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
   # The possible items inside the drop
   possible_items:
   - Adrenaline
@@ -62,6 +64,8 @@ chaos_drop_wave:
   items_per_drop: 1
   # Drop color. (It accepts Random or hex values like '#ffffff')
   color: Random
+  # Cassie message on spawn drop. (Leave blank to disable)
+  cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
   # The possible items inside the drop
   possible_items:
   - Adrenaline
@@ -98,6 +102,8 @@ random_drops:
     items_per_drop: 1
     # Drop color. (It accepts Random or hex values like '#ffffff')
     color: Random
+    # Cassie message on spawn drop. (Leave blank to disable)
+    cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
     # The possible items inside the drop
     possible_items:
     - Adrenaline
@@ -116,5 +122,4 @@ random_drops:
     - GunCOM15
     - GunFSP9
     - GunE11SR
-
 ```
