@@ -5,6 +5,7 @@
     using Configs;
     using Features.Components;
     using PlayerRoles;
+    using PluginAPI.Core;
     using UnityEngine;
     using Random = UnityEngine.Random;
 
@@ -14,6 +15,12 @@
         {
             for(int i = 0; i < numberOfDrops; i++)
                 team.SpawnDrop(config);
+
+            if (!string.IsNullOrEmpty(config.Cassie))
+            {
+                if (team == Team.ChaosInsurgency) Cassie.Message(config.Cassie, true, false);
+                else Cassie.Message(config.Cassie, false, true);
+            }
         }
 
         private static void SpawnDrop(this Team team, DropConfig config)
