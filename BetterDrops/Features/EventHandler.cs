@@ -27,7 +27,7 @@
         [PluginEvent(ServerEventType.RoundStart)]
         public void OnStartingRound()
         {
-            if (BetterDrops.Instance.Config.RandomDrops.WaveSettings.IsEnabled && _coroutines.Count == 0)
+            if (BetterDrops.Instance.Config.RandomDrops?.WaveSettings.IsEnabled == true && _coroutines.Count == 0)
                 _coroutines.Add(Timing.RunCoroutine(RandomDropCoroutine(BetterDrops.Instance.Config.RandomDrops)));
         }
 
