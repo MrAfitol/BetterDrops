@@ -4,6 +4,7 @@
     using InventorySystem;
     using MEC;
     using PluginAPI.Core;
+    using PluginAPI.Core.Items;
     using UnityEngine;
     using Color = UnityEngine.Color;
 
@@ -154,7 +155,7 @@
             }
 
             foreach (ItemType itemType in _items)
-                Server.Instance.ReferenceHub.inventory.ServerDropItem(Server.Instance.ReferenceHub.inventory.ServerAddItem(itemType).ItemSerial).transform.position = t.position;
+                ItemPickup.Create(itemType, t.position, Quaternion.identity).Spawn();
 
             Destroy(GetComponent<Rigidbody>());
             Destroy(gameObject, 5);
