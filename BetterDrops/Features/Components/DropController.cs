@@ -117,6 +117,8 @@
             
             DeployBalloon();
             AddTrigger();
+            if (BetterDrops.Instance.Config.AutoOpen > 0)
+                Invoke(nameof(OpenDrop), BetterDrops.Instance.Config.AutoOpen);
         }
 
         private void DeployBalloon()
@@ -145,10 +147,15 @@
             if (_triggered || !_collided || !other.gameObject.name.Contains("Player"))
                 return;
 
+            OpenDrop();
+        }
+
+        private void OpenDrop()
+        {
             _triggered = true;
 
             Transform t = transform;
-            
+
             for (int i = 0; i < t.childCount - 2; i++)
             {
                 t.GetChild(i).gameObject.AddComponent<DisappearController>().startPos = t.position;
