@@ -23,7 +23,7 @@
                 return false;
             }
             
-            DropExtensions.SpawnDrop(Player.Get(((CommandSender)sender).SenderId).Position + Vector3.up * 10f, Random.ColorHSV(), new [] { ItemType.Coin });
+            DropExtensions.SpawnDrop(Player.Get(((CommandSender)sender).SenderId).Position + Vector3.up * 10f, Random.ColorHSV(), new [] { ItemType.Coin }, false, false);
 
             response = "Spawned!";
             return true;

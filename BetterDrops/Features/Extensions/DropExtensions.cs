@@ -26,14 +26,14 @@
         private static void SpawnDrop(this Team team, DropConfig config)
         {
             Vector3 spawnPosition = team == Team.OtherAlive ? (Random.Range(0, 2) == 1 ? Team.FoundationForces : Team.ChaosInsurgency).GetRandomSpawnPosition() : team.GetRandomSpawnPosition();
-            SpawnDrop(spawnPosition, ParseColor(config.Color), GetRandomItem(config.PossibleItems, config.ItemsPerDrop));
+            SpawnDrop(spawnPosition, ParseColor(config.Color), GetRandomItem(config.PossibleItems, config.ItemsPerDrop), config.FillMaxAmmo, config.RandomAttachments);
         }
 
-        public static void SpawnDrop(Vector3 position, Color color, IEnumerable<ItemType> items)
+        public static void SpawnDrop(Vector3 position, Color color, IEnumerable<ItemType> items, bool fillMaxAmmo, bool randomAttachments)
         {
             GameObject go = new GameObject("DROP")
             { transform = { position = position } };
-            go.AddComponent<DropController>().Init(color, items);
+            go.AddComponent<DropController>().Init(color, items, fillMaxAmmo, randomAttachments);
         }
         
         private static Vector3 GetRandomSpawnPosition(this Team team)

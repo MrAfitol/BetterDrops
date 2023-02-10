@@ -20,6 +20,12 @@
         [Description("Cassie message on spawn drop. (Leave blank to disable)")]
         public string Cassie { get; set; } = "pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival";
 
+        [Description("Will the gun have a full ammo?")]
+        public bool FillMaxAmmo { get; set; } = true;
+
+        [Description("Will the gun have a random attachments?")]
+        public bool RandomAttachments { get; set; } = true;
+
         [Description("The possible items inside the drop")]
         public List<ItemType> PossibleItems { get; set; } = new List<ItemType> {ItemType.Adrenaline, ItemType.Coin, ItemType.Medkit, ItemType.GrenadeFlash, ItemType.GrenadeHE, ItemType.Radio, ItemType.Painkillers, ItemType.ArmorCombat, ItemType.ArmorHeavy, ItemType.ArmorLight, ItemType.GunRevolver, ItemType.GunShotgun, ItemType.GunAK, ItemType.GunCOM15, ItemType.GunFSP9, ItemType.GunE11SR};
     }

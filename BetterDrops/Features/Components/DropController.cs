@@ -2,21 +2,27 @@
 {
     using System.Collections.Generic;
     using InventorySystem;
+    using InventorySystem.Items.Firearms.Attachments;
+    using InventorySystem.Items.Firearms;
     using MEC;
     using PluginAPI.Core;
-    using PluginAPI.Core.Items;
     using UnityEngine;
     using Color = UnityEngine.Color;
+    using InventorySystem.Items.Pickups;
 
     public class DropController: MonoBehaviour
     {
         private Color _color;
         private IEnumerable<ItemType> _items;
+        private bool _fillMaxAmmo;
+        private bool _randomAttachments;
 
-        public void Init(Color mainColor, IEnumerable<ItemType> items)
+        public void Init(Color mainColor, IEnumerable<ItemType> items, bool fillMaxAmmo, bool randomAttachments)
         {
             _color = mainColor;
             _items = items;
+            _fillMaxAmmo = fillMaxAmmo;
+            _randomAttachments = randomAttachments;
             
             Transform t = transform;
             
@@ -162,7 +168,30 @@
             }
 
             foreach (ItemType itemType in _items)
-                ItemPickup.Create(itemType, t.position, Quaternion.identity).Spawn();
+            {
+                var item = Server.Instance.ReferenceHub.inventory.ServerAddItem(itemType);
+
+                if (_fillMaxAmmo || _randomAttachments)
+                {
+                    if (item is Firearm firearm)
+                    {
+                        FirearmStatusFlags firearmStatusFlags = FirearmStatusFlags.MagazineInserted;
+                        if (firearm.HasAdvantageFlag(AttachmentDescriptiveAdvantages.Flashlight))
+                            firearmStatusFlags |= FirearmStatusFlags.FlashlightEnabled;
+
+                        firearm.Status = new FirearmStatus(_fillMaxAmmo ? firearm.AmmoManagerModule.MaxAmmo : (byte)0, firearmStatusFlags,
+                            _randomAttachments ? AttachmentsUtils.GetRandomAttachmentsCode(firearm.ItemTypeId) : firearm.GetCurrentAttachmentsCode());
+                    }
+                }
+
+                ItemPickupBase itemPickup = item.ServerDropItem();
+
+                if (itemPickup != null)
+                {
+                    itemPickup.transform.position = t.position;
+                    itemPickup.transform.rotation = Quaternion.identity;
+                }
+            }
 
             Destroy(GetComponent<Rigidbody>());
             Destroy(gameObject, 5);
