@@ -23,7 +23,8 @@ https://user-images.githubusercontent.com/76150070/210635510-aacb7c2f-f651-4f00-
 
 ## Config
 ```yml
-iis_enabled: true
+# How long to wait before drops open themselves
+auto_open: 15
 # The configs of the MTF drop waves.
 mtf_drop_wave:
 # Is the drop wave enabled.
@@ -36,6 +37,10 @@ mtf_drop_wave:
   color: Random
   # Cassie message on spawn drop. (Leave blank to disable)
   cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
+  # Will the gun have a full ammo?
+  fill_max_ammo: true
+  # Will the gun have a random attachments?
+  random_attachments: true
   # The possible items inside the drop
   possible_items:
   - Adrenaline
@@ -66,6 +71,10 @@ chaos_drop_wave:
   color: Random
   # Cassie message on spawn drop. (Leave blank to disable)
   cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
+  # Will the gun have a full ammo?
+  fill_max_ammo: true
+  # Will the gun have a random attachments?
+  random_attachments: true
   # The possible items inside the drop
   possible_items:
   - Adrenaline
@@ -104,6 +113,10 @@ random_drops:
     color: Random
     # Cassie message on spawn drop. (Leave blank to disable)
     cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
+    # Will the gun have a full ammo?
+    fill_max_ammo: true
+    # Will the gun have a random attachments?
+    random_attachments: true
     # The possible items inside the drop
     possible_items:
     - Adrenaline

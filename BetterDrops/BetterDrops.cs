@@ -14,7 +14,7 @@
         public Config Config;
 
         [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("BetterDrops", "1.0.4", "Plugin to summon and spawn drops.", "Jesus-QC, update by MrAfitol")]
+        [PluginEntryPoint("BetterDrops", "1.0.5", "Plugin to summon and spawn drops.", "Jesus-QC, update by MrAfitol")]
         public void LoadPlugin()
         {
             Instance = this;

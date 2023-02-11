@@ -5,7 +5,7 @@
 
     public class Config
     {
-        [Description("The configs of the MTF drop waves.")]
+        [Description("How long to wait before drops open themselves.")]
         public float AutoOpen { get; set; } = 15f;
 
         [Description("The configs of the MTF drop waves.")]
