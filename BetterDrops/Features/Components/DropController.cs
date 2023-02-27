@@ -9,6 +9,7 @@
     using UnityEngine;
     using Color = UnityEngine.Color;
     using InventorySystem.Items.Pickups;
+    using InventorySystem.Items;
 
     public class DropController: MonoBehaviour
     {
@@ -175,12 +176,14 @@
                 {
                     if (item is Firearm firearm)
                     {
+                        if (_randomAttachments)
+                            firearm.ApplyAttachmentsCode(AttachmentsUtils.GetRandomAttachmentsCode(firearm.ItemTypeId), reValidate: true);
+
                         FirearmStatusFlags firearmStatusFlags = FirearmStatusFlags.MagazineInserted;
                         if (firearm.HasAdvantageFlag(AttachmentDescriptiveAdvantages.Flashlight))
                             firearmStatusFlags |= FirearmStatusFlags.FlashlightEnabled;
 
-                        firearm.Status = new FirearmStatus(_fillMaxAmmo ? firearm.AmmoManagerModule.MaxAmmo : (byte)0, firearmStatusFlags,
-                            _randomAttachments ? AttachmentsUtils.GetRandomAttachmentsCode(firearm.ItemTypeId) : firearm.GetCurrentAttachmentsCode());
+                        firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, firearmStatusFlags, firearm.GetCurrentAttachmentsCode());
                     }
                 }
 
