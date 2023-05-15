@@ -20,6 +20,9 @@
         [Description("Cassie message on spawn drop. (Leave blank to disable)")]
         public string Cassie { get; set; } = "pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival";
 
+        [Description("Will the cashier announcement sound be played at the start and end?")]
+        public bool CassieBell { get; set; } = true;
+
         [Description("Will the gun have a full ammo?")]
         public bool FillMaxAmmo { get; set; } = true;
 

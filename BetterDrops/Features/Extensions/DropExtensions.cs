@@ -18,8 +18,8 @@
 
             if (!string.IsNullOrEmpty(config.Cassie))
             {
-                if (team == Team.ChaosInsurgency) Cassie.Message(config.Cassie, true, false);
-                else Cassie.Message(config.Cassie, false, true);
+                if (team == Team.ChaosInsurgency) Cassie.Message(config.Cassie, false, config.CassieBell);
+                else Cassie.Message(config.Cassie, false, config.CassieBell);
             }
         }
 
