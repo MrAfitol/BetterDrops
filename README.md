@@ -1,6 +1,6 @@
 # BetterDrops
-[![GitHub release](https://flat.badgen.net/github/release/MrAfitol/BetterDrops)](https://github.com/MrAfitol/BetterDrops/releases/)
-![GitHub downloads](https://flat.badgen.net/github/assets-dl/MrAfitol/BetterDrops)
+[![Version](https://img.shields.io/github/v/release/MrAfitol/BetterDrops?sort=semver&style=flat-square&color=blue&label=Version)](https://github.com/MrAfitol/BetterDrops/releases)
+[![Downloads](https://img.shields.io/github/downloads/MrAfitol/BetterDrops/total?style=flat-square&color=yellow&label=Downloads)](https://github.com/MrAfitol/BetterDrops/releases)
 
 
 Plugin to summon and spawn drops.
