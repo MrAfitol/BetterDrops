@@ -9,6 +9,7 @@
     using PluginAPI.Core.Attributes;
     using PluginAPI.Enums;
     using PlayerRoles;
+    using PluginAPI.Core;
 
     public class EventHandler
     {
@@ -32,7 +33,7 @@
         }
 
         [PluginEvent(ServerEventType.TeamRespawn)]
-        public void OnRespawningTeam(SpawnableTeamType spawnableTeam)
+        public void OnRespawningTeam(SpawnableTeamType spawnableTeam, List<Player> players, int count)
         {
             Team team = (spawnableTeam == SpawnableTeamType.NineTailedFox ? Team.FoundationForces : Team.ChaosInsurgency);
             
