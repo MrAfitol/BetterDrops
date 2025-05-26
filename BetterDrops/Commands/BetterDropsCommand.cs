@@ -1,15 +1,15 @@
 ﻿namespace BetterDrops.Commands
 {
-    using System;
     using CommandSystem;
+    using System;
 
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class BetterDropsCommand : ParentCommand
     {
         public BetterDropsCommand() => LoadGeneratedCommands();
-        
+
         public sealed override void LoadGeneratedCommands()
-        { 
+        {
             RegisterCommand(SpawnCommand.Instance);
             RegisterCommand(ChaosCommand.Instance);
             RegisterCommand(MtfCommand.Instance);

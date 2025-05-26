@@ -9,7 +9,7 @@
         private void Update()
         {
             transform.position += 7 * Time.deltaTime * Vector3.up;
-            
+
             _counter += Time.deltaTime;
 
             if (_counter > 10)

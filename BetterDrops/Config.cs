@@ -1,7 +1,7 @@
 ﻿namespace BetterDrops
 {
-    using System.ComponentModel;
     using Configs;
+    using System.ComponentModel;
 
     public class Config
     {

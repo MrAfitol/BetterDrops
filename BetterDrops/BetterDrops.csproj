@@ -35,16 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-Publicized">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\Assembly-CSharp-Publicized.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\Assembly-CSharp-Publicized.dll</HintPath>
     </Reference>
     <Reference Include="CommandSystem.Core">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\CommandSystem.Core.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\CommandSystem.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LabApi, Version=1.0.2.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\Northwood.LabAPI.1.0.2\lib\net48\LabApi.dll</HintPath>
     </Reference>
     <Reference Include="Mirror">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\Mirror.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\Mirror.dll</HintPath>
     </Reference>
     <Reference Include="PluginAPI, Version=13.1.1.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\Northwood.PluginAPI.13.1.1\lib\net48\PluginAPI.dll</HintPath>
@@ -54,13 +57,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\UnityEngine.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\..\..\SCPSL\Plugins\Dependencies\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>$(SCP_Dependencies)\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="YamlDotNet, Version=11.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.11.0.1\lib\net45\YamlDotNet.dll</HintPath>
@@ -77,11 +80,11 @@
     <Compile Include="Features\Components\BalloonController.cs" />
     <Compile Include="Features\Components\DisappearController.cs" />
     <Compile Include="Features\Components\DropController.cs" />
-    <Compile Include="Features\EventHandler.cs" />
+    <Compile Include="Features\EventsHandler.cs" />
     <Compile Include="Features\Extensions\DropExtensions.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Features\SimplifiedLight.cs" />
-    <Compile Include="Features\SimplifiedPrimitive.cs" />
+    <Compile Include="Features\SimplifiedToy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

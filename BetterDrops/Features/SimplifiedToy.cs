@@ -1,11 +1,11 @@
-﻿namespace BetterDrops.Features
-{
-    using AdminToys;
-    using Mirror;
-    using UnityEngine;
+﻿using AdminToys;
+using Mirror;
+using UnityEngine;
 
-    // The code is taken from the genius Jesus-QC and little changed by me
-    public class SimplifiedPrimitive
+namespace SCP1162
+{
+    // The code was originally created by the brilliant Jesus-QC and has been slightly modified by me.
+    public class SimplifiedToy
     {
         /// <summary>
         /// A primitive type
@@ -72,7 +72,7 @@
         /// <param name="color">The primitive color</param>
         /// <param name="parent">The primitive parent</param>
         /// <param name="alpha">The primitive transparency</param>
-        public SimplifiedPrimitive(PrimitiveType type, Vector3 position, Vector3 rotation, Vector3 scale, Color color, Transform parent = null, float alpha = 1f)
+        public SimplifiedToy(PrimitiveType type, Vector3 position, Vector3 rotation, Vector3 scale, Color color, Transform parent = null, float alpha = 1f)
         {
             this.Type = type;
             this.Position = position;
@@ -93,7 +93,8 @@
 
             toy.NetworkPrimitiveType = Type;
 
-            if (Parent != null) toy.transform.parent = Parent;
+            if (Parent != null)
+                toy.transform.SetParent(Parent);
 
             toy.transform.localPosition = Position;
             toy.transform.localEulerAngles = Rotation;
@@ -104,7 +105,6 @@
             toy.NetworkMovementSmoothing = 60;
 
             NetworkServer.Spawn(toy.gameObject);
-
             return toy;
         }
     }

@@ -1,47 +1,48 @@
-﻿namespace BetterDrops.Features.Components
+﻿using AdminToys;
+
+namespace BetterDrops.Features.Components
 {
-    using System.Collections.Generic;
     using InventorySystem;
+    using InventorySystem.Items;
     using InventorySystem.Items.Firearms.Attachments;
-    using InventorySystem.Items.Firearms;
     using MEC;
-    using PluginAPI.Core;
+    using SCP1162;
+    using System.Collections.Generic;
     using UnityEngine;
     using Color = UnityEngine.Color;
-    using InventorySystem.Items.Pickups;
-    using InventorySystem.Items;
+    using FirearmPickup = InventorySystem.Items.Firearms.FirearmPickup;
+    using PrimitiveObjectToy = AdminToys.PrimitiveObjectToy;
 
-    public class DropController: MonoBehaviour
+    public class DropController : MonoBehaviour
     {
         private Color _color;
         private IEnumerable<ItemType> _items;
-        private bool _fillMaxAmmo;
         private bool _randomAttachments;
+        private List<PrimitiveObjectToy> _toys = new List<PrimitiveObjectToy>();
 
-        public void Init(Color mainColor, IEnumerable<ItemType> items, bool fillMaxAmmo, bool randomAttachments)
+        public void Init(Color mainColor, IEnumerable<ItemType> items, bool randomAttachments)
         {
             _color = mainColor;
             _items = items;
-            _fillMaxAmmo = fillMaxAmmo;
             _randomAttachments = randomAttachments;
-            
-            Transform t = transform;
-            
-            SpawnString(t, new Vector3(.5f,1,.5f), new Vector3(7,0,-7));
-            SpawnString(t, new Vector3(-.5f,1,.5f), new Vector3(7,0,7));
-            SpawnString(t, new Vector3(.5f,1,-.5f), new Vector3(-7,0,-7));
-            SpawnString(t, new Vector3(-.5f,1,-.5f), new Vector3(-7,0,7));
 
-            SpawnFace(t, new Vector3(0.5f, 0, 0), new Vector3(0,0,0));
-            SpawnFace(t, new Vector3(0, 0, 0.5f), new Vector3(0,90,0));
-            SpawnFace(t, new Vector3(-0.5f, 0, 0), new Vector3(0,0,0));
-            SpawnFace(t, new Vector3(0, 0, -0.5f), new Vector3(0,90,0));
-            SpawnFace(t, new Vector3(0, 0.5f, 0), new Vector3(0,0,90));
-            SpawnFace(t, new Vector3(0, -0.5f, 0), new Vector3(0,0,90));
-            
+            Transform t = transform;
+
+            SpawnString(t, new Vector3(.5f, 1, .5f), new Vector3(7, 0, -7));
+            SpawnString(t, new Vector3(-.5f, 1, .5f), new Vector3(7, 0, 7));
+            SpawnString(t, new Vector3(.5f, 1, -.5f), new Vector3(-7, 0, -7));
+            SpawnString(t, new Vector3(-.5f, 1, -.5f), new Vector3(-7, 0, 7));
+
+            SpawnFace(t, new Vector3(0.5f, 0, 0), new Vector3(0, 0, 0));
+            SpawnFace(t, new Vector3(0, 0, 0.5f), new Vector3(0, 90, 0));
+            SpawnFace(t, new Vector3(-0.5f, 0, 0), new Vector3(0, 0, 0));
+            SpawnFace(t, new Vector3(0, 0, -0.5f), new Vector3(0, 90, 0));
+            SpawnFace(t, new Vector3(0, 0.5f, 0), new Vector3(0, 0, 90));
+            SpawnFace(t, new Vector3(0, -0.5f, 0), new Vector3(0, 0, 90));
+
             SpawnBalloon(t);
             SpawnLight(t);
-            
+
             Rigidbody r = t.gameObject.AddComponent<Rigidbody>();
             r.drag = 5;
             r.constraints = RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
@@ -57,32 +58,30 @@
 
         private void SpawnBalloon(Transform parent)
         {
-            CreateToy(PrimitiveType.Sphere, parent, new Vector3(0,2,0), Vector3.zero, new Vector3(-2,-2,-2), _color);
+            CreateToy(PrimitiveType.Sphere, parent, new Vector3(0, 2, 0), Vector3.zero, new Vector3(-2, -2, -2), _color);
         }
 
         private void SpawnString(Transform parent, Vector3 position, Vector3 rotation)
         {
-            CreateToy(PrimitiveType.Cylinder, parent, position, rotation, new Vector3(-.05f,-1,-.05f), Color.white);
+            CreateToy(PrimitiveType.Cylinder, parent, position, rotation, new Vector3(-.05f, -1, -.05f), Color.white);
         }
-        
+
         private void SpawnFace(Transform parent, Vector3 position, Vector3 rotation)
         {
-            Transform f = new GameObject("face").transform;
-            f.SetParent(parent);
-            f.localPosition = position;
-            f.localRotation = Quaternion.Euler(rotation);
-            
-            SpawnBigFace(f);
-            SpawnFacePart(f, Vector3.zero);
-            SpawnFacePart(f, new Vector3(0,0,-0.3f));
-            SpawnFacePart(f, new Vector3(0,0,0.3f));
+            PrimitiveObjectToy primitiveObjectToy = new SimplifiedToy(PrimitiveType.Cube, position, rotation, Vector3.one, Color.white, parent, 0).Spawn();
+            primitiveObjectToy.NetworkPrimitiveFlags = PrimitiveFlags.None;
+            _toys.Add(primitiveObjectToy);
+            SpawnBigFace(primitiveObjectToy.transform);
+            SpawnFacePart(primitiveObjectToy.transform, Vector3.zero);
+            SpawnFacePart(primitiveObjectToy.transform, new Vector3(0, 0, -0.3f));
+            SpawnFacePart(primitiveObjectToy.transform, new Vector3(0, 0, 0.3f));
         }
 
         private void SpawnBigFace(Transform parent)
         {
             CreateToy(PrimitiveType.Cube, parent, Vector3.zero, Vector3.zero, new Vector3(-.1f, -1, -1), _color);
         }
-        
+
         private void SpawnFacePart(Transform parent, Vector3 localPosition)
         {
             CreateToy(PrimitiveType.Cube, parent, localPosition, Vector3.zero, new Vector3(-.2f, 1.2f, -.2f), Color.black);
@@ -92,10 +91,10 @@
         {
             new SimplifiedLight(Vector3.zero, Vector3.zero, Vector3.one, _color, 8, parent).Spawn();
         }
-        
-        private static void CreateToy(PrimitiveType type, Transform parent, Vector3 pos, Vector3 rot, Vector3 scale, Color color)
+
+        private void CreateToy(PrimitiveType type, Transform parent, Vector3 pos, Vector3 rot, Vector3 scale, Color color)
         {
-            new SimplifiedPrimitive(type, pos, rot, scale, color, parent).Spawn();
+            _toys.Add(new SimplifiedToy(type, pos, rot, scale, color, parent).Spawn());
         }
 
         private static void ChangeLayers(Transform t, int layer)
@@ -114,14 +113,14 @@
         }
 
         private bool _collided;
-        
+
         private void OnCollisionEnter()
         {
             if (_collided)
                 return;
 
             _collided = true;
-            
+
             DeployBalloon();
             AddTrigger();
             if (BetterDrops.Instance.Config.AutoOpen > 0)
@@ -159,41 +158,25 @@
 
         private void OpenDrop()
         {
+            if (_triggered)
+                return;
+
             _triggered = true;
 
             Transform t = transform;
 
             for (int i = 0; i < t.childCount - 2; i++)
-            {
                 t.GetChild(i).gameObject.AddComponent<DisappearController>().startPos = t.position;
-            }
 
             foreach (ItemType itemType in _items)
             {
-                var item = Server.Instance.ReferenceHub.inventory.ServerAddItem(itemType);
+                if (!InventoryItemLoader.AvailableItems.TryGetValue(itemType, out ItemBase _item))
+                    continue;
 
-                if (_fillMaxAmmo || _randomAttachments)
-                {
-                    if (item is Firearm firearm)
-                    {
-                        if (_randomAttachments)
-                            firearm.ApplyAttachmentsCode(AttachmentsUtils.GetRandomAttachmentsCode(firearm.ItemTypeId), reValidate: true);
+                var item = InventoryExtensions.ServerCreatePickup(_item, null, t.position, true);
 
-                        FirearmStatusFlags firearmStatusFlags = FirearmStatusFlags.MagazineInserted;
-                        if (firearm.HasAdvantageFlag(AttachmentDescriptiveAdvantages.Flashlight))
-                            firearmStatusFlags |= FirearmStatusFlags.FlashlightEnabled;
-
-                        firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, firearmStatusFlags, firearm.GetCurrentAttachmentsCode());
-                    }
-                }
-
-                ItemPickupBase itemPickup = item.ServerDropItem();
-
-                if (itemPickup != null)
-                {
-                    itemPickup.transform.position = t.position;
-                    itemPickup.transform.rotation = Quaternion.identity;
-                }
+                if (item is FirearmPickup firearm && _randomAttachments)
+                    AttachmentCodeSync.ServerSetCode(firearm.Info.Serial, AttachmentsUtils.GetRandomAttachmentsCode(firearm.Info.ItemId));
             }
 
             Destroy(GetComponent<Rigidbody>());

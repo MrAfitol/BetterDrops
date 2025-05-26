@@ -1,14 +1,14 @@
 ﻿namespace BetterDrops.Commands
 {
-    using System;
-    using Features.Extensions;
     using CommandSystem;
+    using Features.Extensions;
     using PlayerRoles;
+    using System;
 
     public class MtfCommand : ICommand
     {
         public static MtfCommand Instance { get; } = new MtfCommand();
-        
+
         public string Command { get; } = "mtf";
         public string[] Aliases { get; } = Array.Empty<string>();
         public string Description { get; } = "Spawn a drop";

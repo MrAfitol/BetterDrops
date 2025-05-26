@@ -1,27 +1,43 @@
 ﻿namespace BetterDrops
 {
     using Features;
-    using PluginAPI.Core;
-    using PluginAPI.Core.Attributes;
-    using PluginAPI.Enums;
-    using PluginAPI.Events;
+    using LabApi.Events.Handlers;
+    using LabApi.Features;
+    using LabApi.Loader.Features.Plugins;
+    using System;
 
-    public class BetterDrops
+    public class BetterDrops : Plugin<Config>
     {
         public static BetterDrops Instance { get; private set; }
 
-        [PluginConfig("configs/better_drops.yml")]
-        public Config Config;
+        public override string Name => "BetterDrops";
 
-        [PluginPriority(LoadPriority.Highest)]
-        [PluginEntryPoint("BetterDrops", "1.0.9", "Plugin to summon and spawn drops.", "Jesus-QC, update by MrAfitol")]
-        public void LoadPlugin()
+        public override string Description => "Plugin to summon and spawn drops.";
+
+        public override string Author => "Jesus-QC, update by MrAfitol";
+
+        public override Version Version => new Version(1, 1, 0);
+
+        public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
+
+        public EventsHandler EventHandler { get; private set; }
+
+        public override void Enable()
         {
             Instance = this;
-            EventManager.RegisterEvents<EventHandler>(this);
+            EventHandler = new EventsHandler();
+            ServerEvents.RoundRestarted += EventHandler.OnRoundRestarted;
+            ServerEvents.RoundStarted += EventHandler.OnRoundStarted;
+            ServerEvents.WaveRespawning += EventHandler.OnRespawningTeam;
+        }
 
-            var handler = PluginHandler.Get(this);
-            handler.SaveConfig(this, nameof(Config));
+        public override void Disable()
+        {
+            ServerEvents.RoundRestarted -= EventHandler.OnRoundRestarted;
+            ServerEvents.RoundStarted -= EventHandler.OnRoundStarted;
+            ServerEvents.WaveRespawning -= EventHandler.OnRespawningTeam;
+            EventHandler = null;
+            Instance = null;
         }
     }
 }
