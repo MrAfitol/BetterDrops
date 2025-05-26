@@ -11,7 +11,7 @@ The original plugin for Exiled https://github.com/Jesus-QC/BetterDrops
    
    *("C:\Users\(user name)\AppData\Roaming\SCP Secret Laboratory\" for windows, "/home/(user name)/.config/SCP Secret Laboratory/" for linux)*
   
-   - *2. Find the "PluginAPI" folder there, it contains the "plugins" folder.*
+   - *2. Find the "LabAPI" folder there, it contains the "plugins" folder.*
   
    - *3. Select either the port of your server to install the same on that server or the "global" folder to install the plugin for all servers*
   
@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/76150070/210635510-aacb7c2f-f651-4f00-
 
 ## Config
 ```yml
-# How long to wait before drops open themselves
+# How long to wait before drops open themselves.
 auto_open: 15
 # The configs of the MTF drop waves.
 mtf_drop_wave:
@@ -37,8 +37,8 @@ mtf_drop_wave:
   color: Random
   # Cassie message on spawn drop. (Leave blank to disable)
   cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
-  # Will the gun have a full ammo?
-  fill_max_ammo: true
+  # Will the cashier announcement sound be played at the start and end?
+  cassie_bell: true
   # Will the gun have a random attachments?
   random_attachments: true
   # The possible items inside the drop
@@ -71,8 +71,8 @@ chaos_drop_wave:
   color: Random
   # Cassie message on spawn drop. (Leave blank to disable)
   cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
-  # Will the gun have a full ammo?
-  fill_max_ammo: true
+  # Will the cashier announcement sound be played at the start and end?
+  cassie_bell: true
   # Will the gun have a random attachments?
   random_attachments: true
   # The possible items inside the drop
@@ -113,8 +113,8 @@ random_drops:
     color: Random
     # Cassie message on spawn drop. (Leave blank to disable)
     cassie: pitch_0.2 .g4... pitch_1 Supply jam_020_2 has been arrival
-    # Will the gun have a full ammo?
-    fill_max_ammo: true
+    # Will the cashier announcement sound be played at the start and end?
+    cassie_bell: true
     # Will the gun have a random attachments?
     random_attachments: true
     # The possible items inside the drop
